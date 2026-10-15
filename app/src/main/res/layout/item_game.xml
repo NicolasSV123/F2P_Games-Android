@@ -3,16 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="8dp">
+    android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/gameCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        app:cardElevation="4dp"
+        app:strokeWidth="1dp">
 
         <LinearLayout
-            android:id="@+id/gameCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -27,6 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -54,9 +58,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Genre"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="#9000FF"
-                        android:enabled="false"/>
+                        android:textColor="@color/md_theme_onTertiary"
+                        android:enabled="false"
+                        app:ensureMinTouchTargetSize="false"
+                        app:chipBackgroundColor="@color/md_theme_tertiary"/>
 
                     <Space
                         android:layout_width="0dp"
@@ -68,7 +73,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_platform_pc_windows"
-                        app:tint="#8B00F4" />
+                        app:tint="@color/md_theme_primary"/>
 
                 </LinearLayout>
 

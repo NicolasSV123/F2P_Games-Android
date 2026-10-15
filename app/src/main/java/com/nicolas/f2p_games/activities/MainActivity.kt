@@ -1,10 +1,12 @@
 package com.nicolas.f2p_games.activities
 
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,11 +17,8 @@ import com.nicolas.f2p_games.data.Game
 import com.nicolas.f2p_games.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import kotlin.coroutines.coroutineContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: GameAdapter
 
     var gameList: List<Game> = emptyList()
+    var filteredGameList: List<Game> = emptyList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +60,40 @@ class MainActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             gameList = api.getGamesList()
-            withContext(Dispatchers.Main) {
+            filteredGameList = gameList
+
+            CoroutineScope(Dispatchers.Main).launch {
                 adapter.updateData(gameList)
+                showData()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_main_menu, menu)
+
+        val searchMenuItem = menu.findItem(R.id.menu_search)
+        val searchView = searchMenuItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                filteredGameList = gameList.filter {
+                    it.title.contains(newText, true)
+                }
+                showData()
+                return true
+            }
+        })
+
+        return true
+    }
+
+    fun showData() {
+        adapter.updateData(filteredGameList)
+        supportActionBar?.subtitle = "Found ${filteredGameList.size} games"
     }
 }
