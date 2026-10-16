@@ -16,13 +16,13 @@ data class Game(
     @SerializedName("game_url") val gameUrl: String,
     @SerializedName("genre") val genre: String,
     @SerializedName("screenshots")val screenshots: List<Screenshot>?,
-    @SerializedName("minimun_system_requierements")val systemRequirements: SystemRequirements?
+    @SerializedName("minimum_system_requirements")val systemRequirements: SystemRequirements?
 
 
     )
 
 data class Screenshot (
-    @SerializedName("image")val image: Int
+    @SerializedName("image")val image: String,
     )
 
 data class SystemRequirements(
@@ -30,5 +30,5 @@ data class SystemRequirements(
     @SerializedName("processor")val processor: String,
     @SerializedName("memory")val memory: String,
     @SerializedName("graphics")val graphics: String,
-    @SerializedName("storage")val storage: String
+    @SerializedName("storage")val storage: String,
     )

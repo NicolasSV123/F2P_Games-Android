@@ -1,9 +1,11 @@
 package com.nicolas.f2p_games.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.nicolas.f2p_games.R
@@ -67,13 +69,11 @@ class DetailActivity : AppCompatActivity() {
     fun loadData(){
         supportActionBar?.title = game.title
         supportActionBar?.subtitle = game.developer
-        //supportActionBar?.subtitle = game.
 
-        //Hero.
-
+        //Imagen de la cabezera del activity detail
         Picasso.get().load(game.thumbnail).into(binding.thumbnailImageView);
 
-
+        //Informacion basica
         binding.titleTextView.text = game.title
         binding.chip.text = game.genre
 
@@ -82,8 +82,6 @@ class DetailActivity : AppCompatActivity() {
         } else{
             R.drawable.ic_platform_web
         }
-
-
         binding.platformImageView.setImageResource(platformResId)
 
         //descripcion
@@ -94,6 +92,28 @@ class DetailActivity : AppCompatActivity() {
         binding.screenshotsRecyclerView.adapter = adapter
 
         //requisitos del sistema.
+
+        binding.systemRequirementsOsTextView.text = game.systemRequirements?.os
+        binding.systemRequirementsProcessorTextView.text = game.systemRequirements?.processor
+        binding.systemRequirementsMemoryTextView.text = game.systemRequirements?.memory
+        binding.systemRequirementsGraphicsTextView.text = game.systemRequirements?.graphics
+        binding.systemRequirementsStorageTextView.text = game.systemRequirements?.storage
+
+        //Botones
+        binding.playButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setData(game.gameUrl.toUri())
+            startActivity(intent)
+        }
+        binding.shareButton.setOnClickListener {
+            val sendIntent = Intent(Intent.ACTION_SEND)
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Mira que juego esta gratis: ${game.profileUrl}.")
+            sendIntent.type = "text/plain"
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+
 
     }
 }

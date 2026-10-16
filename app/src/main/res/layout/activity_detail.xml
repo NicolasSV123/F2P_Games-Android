@@ -85,12 +85,12 @@
                 android:paddingHorizontal="16dp">
 
                 <TextView
-                    android:id="@+id/descriptionTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Description"/>
 
                 <TextView
+                    android:id="@+id/descriptionTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lorem Ipsum"/>
@@ -128,21 +128,112 @@
                 android:layout_margin="16dp"/>
 
             <!--Requisitos del sistema-->
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                
-                <TextView
-                    android:layout_width=""
-                    android:layout_height=""
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="System requirements" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OS" />
+
+                <TextView
+                    android:id="@+id/systemRequirementsOsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Windows 11" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Processor" />
+
+                <TextView
+                    android:id="@+id/systemRequirementsProcessorTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Intel Core i3" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Memory" />
+
+                <TextView
+                    android:id="@+id/systemRequirementsMemoryTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="6 GB RAM" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Graphics" />
+
+                <TextView
+                    android:id="@+id/systemRequirementsGraphicsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="NVIDIA GeForce GTX 600 series, AMD Radeon HD 7000 series" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Storage" />
+
+                <TextView
+                    android:id="@+id/systemRequirementsStorageTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="50 Gb" />
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="64dp"/>
 
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="32dp"
+        android:paddingVertical="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/playButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Play"/>
+
+        <Space
+            android:layout_width="16dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/shareButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_search"/>
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

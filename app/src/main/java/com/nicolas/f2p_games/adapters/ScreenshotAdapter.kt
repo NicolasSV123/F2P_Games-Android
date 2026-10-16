@@ -34,7 +34,6 @@ class ScreenshotAdapter(
 class ScreenshotViewHolder(val binding: ItemScreenshotBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun render(screenshot: Screenshot) {
-
-    // binding.thumbnailImageView
+        Picasso.get().load(screenshot.image).into(binding.screenshotImageView)
     }
 }
