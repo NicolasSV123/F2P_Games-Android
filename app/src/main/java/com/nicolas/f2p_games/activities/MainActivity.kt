@@ -1,5 +1,6 @@
 package com.nicolas.f2p_games.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -46,13 +47,15 @@ class MainActivity : AppCompatActivity() {
 
         //Configuracion ReclyclerView
         adapter = GameAdapter(gameList){ position ->
-            val game = gameList[position]
-            Toast.makeText(this, game.title, Toast.LENGTH_SHORT).show()
+            val game = filteredGameList[position]
+
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_GAME_ID, game.id)
+            startActivity(intent)
         }
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-
 
 
         //Obtener los juegos de la API
